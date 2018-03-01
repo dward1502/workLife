@@ -14,10 +14,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "o9a6gzqbz8h5two6",
-    "password": "uu6u6heeh3tmpics",
-    "database": "worklife_db",
-    "host": "sp6xl8zoyvbumaa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
 }
