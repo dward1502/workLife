@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "s0y0t7xx9tbeq4jx",
+    "password": "qf1a2gybn52s0geu",
+    "database": "worklife_db",
+    "host": "z37udk8g6jiaqcbx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "s0y0t7xx9tbeq4jx",
+    "password": "qf1a2gybn52s0geu",
+    "database": "worklife_db",
+    "host": "z37udk8g6jiaqcbx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
+  }
+}
