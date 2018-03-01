@@ -1,5 +1,5 @@
 {
-  "name": "burger",
+  "name": "worklife",
   "version": "1.0.0",
   "description": "A program to showcase the use of node.js handlebars",
   "main": "server.js",
