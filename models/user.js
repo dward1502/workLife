@@ -28,12 +28,15 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                notEmpty: true,
+                notEmpty: true
             }
         },
         answers: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
         },
         work_points: {
             type: DataTypes.INTEGER,
