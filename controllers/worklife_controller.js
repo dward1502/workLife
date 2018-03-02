@@ -22,7 +22,19 @@ router.get('/register', function(req, res){
 //and then pass back user info to the page.
 router.get('/home', function(req, res){
     //NOT DONE
-    res.render("home");
+    db.User.findOne({
+        where: {
+            username: {
+                [Op.like]: req.body.username
+            },
+            password: {
+                [Op.link]: req.body.password
+            }
+        }
+    }).then(function (dbUser) {
+        res.json(dbUser);
+        res.render("home", dbUser);
+    });
 });
 
 //Route to the survey.
@@ -35,13 +47,37 @@ router.get('/survey', function(req, res){
 //Will also need to get data from the suggestions database.
 router.get('/results', function(req, res){
     //NOT DONE
-    res.render("results");
+    db.User.findOne({
+        where: {
+            username: {
+                [Op.like]: req.body.username
+            },
+            password: {
+                [Op.link]: req.body.password
+            }
+        }
+    }).then(function (dbUser) {
+        res.json(dbUser);
+        res.render("results", dbUser);
+    });
 });
 
 //Route to the input. TO BE DONE: get the data for the specific user.
 router.get('/input', function(req, res){
     //NOT DONE
-    res.render('input');
+    db.User.findOne({
+        where: {
+            username: {
+                [Op.like]: req.body.username
+            },
+            password: {
+                [Op.link]: req.body.password
+            }
+        }
+    }).then(function (dbUser) {
+        res.json(dbUser);
+        res.render("input", dbUser);
+    });
 });
 
 //Route to post the user data on registration. TO BE DONE:
@@ -62,9 +98,10 @@ router.post('/api/users', function (req, res) {
         work_points: req.body.workPoints,
         life_points: req.body.lifePoints,
         exercise_points: req.body.exercisePoints,
-    }).then(function (item) {
-        console.log("Item added: ", item);
-        res.json(item);
+    }).then(function (dbUser) {
+        console.log("Item added: ", dbUser);
+        res.json(dbUser);
+        res.render("home",dbUser)
     }).catch(function(err){
         res.json(err);
     });
@@ -84,6 +121,7 @@ router.put('/api/users', function(req, res){
         }
     }).then(function(dbUser){
         res.json(dbUser);
+        res.render("home", dbUser);
     }).catch(function(err){
         res.json(err);
     });
@@ -99,7 +137,31 @@ router.delete('/api/users/:id', function(req, res){
         }
     }).then(function(dbUser){
         res.json(dbUser);
+        res.render("index");
+    }).catch(function(err){
+        res.json(err);
     });
+});
+
+//Route to login
+router.post('/login', function(req, res){
+
+    db.User.findOne({
+        where: {
+            username: {
+                [Op.like]: req.body.username
+            },
+            password: {
+                [Op.link]: req.body.password
+            }
+        }
+    }).then(function(dbUser){
+        res.json(dbUser);
+        res.render("home", dbUser);
+    }).catch(function(err){
+        res.json(err);
+    });
+
 });
 
 // Export routes for server.js to use.
