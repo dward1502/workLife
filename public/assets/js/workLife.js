@@ -30,20 +30,47 @@ $("#loginBtn").on("click", function (event) {
 });
 
 $("#submit").on("click", function (event) {
+    event.preventDefault();
+
     console.log("register btn works");
+    var creative = [];
+    var social = [];
+    var service = [];
+
+    $.each($("input[name='service']:checked"), function () {
+        creative.push($(this).val());
+    });
+    $.each($("input[name='social']:checked"), function () {
+        social.push($(this).val());
+    });
+    $.each($("input[name=service]:checked"), function () {
+        service.push($(this).val());
+    });
 
     var newRegUser = {
         firstname: $("#firstName").val().trim(),
         lastname: $("#lastName").val().trim(),
         username: $("#userName").val().trim(),
-        password: $("#password").val().trim()
-    }
+        password: $("#password").val().trim(),
+        age: $("#age").val(),
+        married: $('.mar:checked').val(),
+        children: $(".kid:checked").val(),
+        parents: $(".par:checked").val(),
+        excercise: $(".ex:checked").val(),
+        healthy: $(".health").val(),
+        work: $(".wrk:checked").val(),
+        creative: creative,
+        social: social,
+        services: service
+    };
     console.log(newRegUser);
 
-    var radioCheck = $('.mar:checked').val();
-    console.log("This is the radio button value if it is checked: " + radioCheck);
-
-
+    $.ajax("/api/users", {
+        type: "POST",
+        data: newRegUser
+    }).then(function () {
+        console.log("reg information has been sent to server");
+    });
 
 });
 
