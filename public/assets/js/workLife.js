@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $("#loginModal").hide();
-
 });
 
 
@@ -10,13 +9,82 @@ $('#login').leanModal({
     closeButton: ".close"
 });
 
+$("#loginBtn").on("click", function (event) {
+    console.log("login btn works");
 
+    var userLogin = {
+        username: $("#username").val().trim(),
+        password: $("#password").val().trim()
+    };
+    console.log(userLogin);
+
+
+    $.ajax("/login", {
+        type: "POST",
+        data: userLogin
+    }).then(function () {
+        console.log("username has been sent to server");
+    });
+
+    event.preventDefault();
+});
+
+$("#submit").on("click", function (event) {
+    event.preventDefault();
+
+    console.log("register btn works");
+    var creative = [];
+    var social = [];
+    var service = [];
+
+    $.each($("input[name='service']:checked"), function () {
+        creative.push($(this).val());
+    });
+    $.each($("input[name='social']:checked"), function () {
+        social.push($(this).val());
+    });
+    $.each($("input[name=service]:checked"), function () {
+        service.push($(this).val());
+    });
+
+    var newRegUser = {
+        firstname: $("#firstName").val().trim(),
+        lastname: $("#lastName").val().trim(),
+        username: $("#userName").val().trim(),
+        password: $("#password").val().trim(),
+        age: $("#age").val(),
+        married: $('.mar:checked').val(),
+        children: $(".kid:checked").val(),
+        parents: $(".par:checked").val(),
+        excercise: $(".ex:checked").val(),
+        healthy: $(".health").val(),
+        work: $(".wrk:checked").val(),
+        creative: creative,
+        social: social,
+        services: service
+    };
+    console.log(newRegUser);
+
+    $.ajax("/api/users", {
+        type: "POST",
+        data: newRegUser
+    }).then(function () {
+        console.log("reg information has been sent to server");
+    });
+
+});
+
+
+var w = window.innerWidth;
+var h = window.innerHeight;
 //Javascript for cool animation on page
 var container = document.getElementById('container');
 var renderer = new FSS.SVGRenderer();
 var scene = new FSS.Scene();
-var light = new FSS.Light('#111122', '#FF0022');
-var geometry = new FSS.Plane(1400, 1200, 6, 4);
+//             colors      secondary     main 
+var light = new FSS.Light('#111122', '#7ddc1f');
+//                         w     h   #of polygon  angle of polygon
+var geometry = new FSS.Plane(1400, 1200, 10, 6);
 var material = new FSS.Material('#FFFFFF', '#FFFFFF');
 var mesh = new FSS.Mesh(geometry, material);
 var now, start = Date.now();
