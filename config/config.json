@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "s0y0t7xx9tbeq4jx",
-    "password": "qf1a2gybn52s0geu",
+    "username": "root",
+    "password": "X1ky147z",
     "database": "worklife_db",
-    "host": "z37udk8g6jiaqcbx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
