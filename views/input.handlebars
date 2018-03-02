@@ -1,1 +1,53 @@
-<h1>Input page handlebars</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>input html</title>
+    <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container" id="container"></div>
+    <div class="grid-cont-input">
+        <a class="login100-form-btn back" id="back" href="/home.html">Back</a>
+        <h2 class="usernameDisplay">Username Input</h2>
+        <h4 class="exTitle"> Excercise </h4>
+        <h1 class="inputpgTitle">Weekly Input</h1>
+        <div class="exDiv">
+            <form action="" class="exForm">
+                <label for="" class="i_q_1">Question 1</label>
+                <!-- checkbox is too big and labels overlap on the class id give it a margin top to separate the questions and labels with chekcbox/radio -->
+                <input type="checkbox" class="i_q_1" id="partwork" name="work" value="partwork">
+                <label class="i_q_1" for="partwork">Part-Time</label>
+                <label for="" class="i_q_2">Question 2</label>
+                <label for="" class="i_q_3">Question 3</label>
+
+            </form>
+        </div>
+        <h4 class="wrktitle">Work</h4>
+        <div class="wrkDiv">
+            <form action="" class="wrkForm">
+
+            </form>
+        </div>
+        <h4 class="lifeTitle">Life</h4>
+        <div class="lifeDiv">
+            <form action="" class="lifeForm">
+
+            </form>
+        </div>
+        <button class="login100-form-btn submitInput" id="subInput">Submit Balance</button>
+    </div>
+
+    <script src="jquery.leanModal.min.js"></script>
+    <script src="fss.js"></script>
+    <script src="test.js"></script>
+</body>
+
+</html>

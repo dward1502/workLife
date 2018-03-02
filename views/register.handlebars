@@ -1,1 +1,141 @@
-<h1>Register page handlebars</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>reg html</title>
+    <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="container" id="container"></div>
+    <div class="grid-cont-reg">
+        <form class="regForm">
+            <span class="login100-form-logo ">
+            </span>
+            <h6 class="logoTitle">Work Balance Life</h6>
+            <h1>Registration</h1>
+            <input type="text" name="firstName" placeholder="First Name" id="firstName" required>
+            <input type="text" name="lastName" placeholder="Last Name" id="lastName" required>
+            <input type="email" name="userName" placeholder="Username" id="userName" required>
+            <input type="password" name="password" placeholder="Password" id="password" required>
+            <h3 class="survey">Survey Questions</h3>
+            <label for="q_1">Are you married/have a partner?</label>
+            <div>
+                <input type="radio" id="marChoice1" class="mar" name="married" value="yes" required>
+                <label for="marChoice1">Yes</label>
+                <input type="radio" id="marChoice2" class="mar" name="married" value="no" required>
+                <label for="marChoice2">No</label>
+            </div>
+            <label for="q_2">How old are you?</label>
+            <br>
+            <input type="number" placeholder="Age" id="age" required>
+            <br>
+            <label for="q_3">Do you have children?</label>
+            <div>
+                <input type="radio" id="childChoice1" name="child" value="yes" required>
+                <label for="childChoice1">Yes</label>
+                <input type="radio" id="childChoice2" name="child" value="no" required>
+                <label for="childChoice2">No</label>
+            </div>
+            <label for="q_4">Is one/both of your parents alive?</label>
+            <div>
+                <input type="radio" id="parentChoice1" name="parent" value="yes" required>
+                <label for="parentChoice1">Yes</label>
+                <input type="radio" id="parentChoice2" name="parent" value="no" required>
+                <label for="parentChoice2">No</label>
+            </div>
+            <label for="q_5">Do you excercise?</label>
+            <div>
+                <input type="radio" id="excerciseChoice1" name="excercise" value="yes" required>
+                <label for="excerciseChoice1">Yes</label>
+                <input type="radio" id="excerciseChoice2" name="excercise" value="no" required>
+                <label for="excerciseChoice2">No</label>
+            </div>
+            <label for="q_6">Do you consider yourself someone who eats healthy?</label>
+            <div>
+                <input type="radio" id="healthyChoice1" name="healthy" value="yes" required>
+                <label for="healthyChoice1">Yes</label>
+                <input type="radio" id="healthyChoice2" name="healthy" value="no" required>
+                <label for="healthyChoice2">No</label>
+            </div>
+            <label for="q_7">What is your work schedule?</label>
+            <div>
+                <input type="checkbox" id="fullwork" name="work" value="fullwork">
+                <label for="fullwork">Full-Time</label>
+                <input type="checkbox" id="partwork" name="work" value="partwork">
+                <label for="partwork">Part-Time</label>
+                <input type="checkbox" id="nowork" name="work" value="nowork">
+                <label for="nowork">No Work</label>
+            </div>
+            <label for="q_8">Do you do any of these creative activities?</label>
+            <div>
+                <div>
+                    <input type="checkbox" id="walking" name="creative" value="walking">
+                    <label for="walking">Walking</label>
+                    <input type="checkbox" id="hiking" name="creative" value="hiking">
+                    <label for="hiking">Hiking</label>
+                    <input type="checkbox" id="surfing" name="creative" value="surfing">
+                    <label for="surfing">Surfing</label>
+                    <input type="checkbox" id="basketball" name="creative" value="basketball">
+                    <label for="basketball">Basketball</label>
+                    <input type="checkbox" id="softball" name="creative" value="softball">
+                    <label for="softball">Softball</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="soccer" name="creative" value="soccer">
+                    <label for="soccer">Soccer</label>
+                    <input type="checkbox" id="softball" name="creative" value="softball">
+                    <label for="softball">Softball</label>
+                    <input type="checkbox" id="yoga" name="creative" value="yoga">
+                    <label for="yoga">Yoga</label>
+                    <input type="checkbox" id="gym" name="creative" value="gym">
+                    <label for="gym">Gym</label>
+                    <input type="checkbox" id="dancing" name="creative" value="dancing">
+                    <label for="dancing">Dancing</label>
+                </div>
+            </div>
+            <label for="q_9">Do you do any of these social activities?</label>
+            <div>
+                <input type="checkbox" id="travel" name="social" value="travel">
+                <label for="travel">Travel</label>
+                <input type="checkbox" id="drink" name="social" value="drink">
+                <label for="drink">Light drinking</label>
+                <input type="checkbox" id="party" name="social" value="party">
+                <label for="party">Dinner Parties</label>
+                <input type="checkbox" id="dinner" name="social" value="dinner">
+                <label for="dinner">Go out to dinner</label>
+                <input type="checkbox" id="music" name="social" value="music">
+                <label for="music">Go See Music</label>
+                <input type="checkbox" id="culture" name="social" value="culture">
+                <label for="culture">Experience Culture</label>
+            </div>
+            <label for="q_10">Do you do any social services?</label>
+            <div>
+                <input type="checkbox" id="volunteer" name="service" value="volunteer">
+                <label for="volunteer">Volunteer</label>
+                <input type="checkbox" id="donate" name="service" value="donate">
+                <label for="donate">Donate to a cause</label>
+                <input type="checkbox" id="environment" name="service" value="environment">
+                <label for="environment">Environmental Action</label>
+                <input type="checkbox" id="outreach" name="service" value="outreach">
+                <label for="outreach">Community Outreach</label>
+            </div>
+            <div>
+                <button class="login100-form-btn " id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="jquery.leanModal.min.js"></script>
+    <script src="fss.js"></script>
+    <script src="test.js"></script>
+</body>
+
+</html>
