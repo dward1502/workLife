@@ -1,3 +1,4 @@
+//Model to handle the survey data.
 module.exports = function(sequelize, DataTypes){
     var Survey = sequelize.define("Survey", {
         age: {

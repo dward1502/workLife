@@ -83,7 +83,7 @@ router.get('/input', function(req, res){
 //Determine whether we can just pass back the JSON or 
 //whether we need to render the home page. Ensure
 //the names for each field from the client corresponds to the names
-//used in this file.
+//used in this file. Survey has knowledge of user.
 router.post('/api/users', function (req, res) {
 
     authToken = cryptoRandomString(10);
