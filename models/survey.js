@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes){
            allowNull: false,
            validate: {
                isAlpha: true,
-               allowEmpty: false
+               notEmpty: false
            }
        },
        children: {
@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes){
            allowNull: false,
            validate: {
                isAlpha: true,
-               allowEmpty: false
+               notEmpty: false
            }
        },
        parents: {
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes){
            allowNull: false,
            validate: {
                isAlpha: true,
-               allowEmpty: false
+               notEmpty: false
            }
        },
        exercise: {
@@ -37,7 +37,7 @@ module.exports = function(sequelize, DataTypes){
            allowNull: false,
            validate: {
                isAlpha: true,
-               allowEmpty: false
+               notEmpty: false
            }
        },
        healthy: {
@@ -45,7 +45,7 @@ module.exports = function(sequelize, DataTypes){
            allowNull: false,
            validate: {
                isAlpha: true,
-               allowEmpty: false
+               notEmpty: false
            }
        },
        work: {
@@ -53,28 +53,28 @@ module.exports = function(sequelize, DataTypes){
            allowNull: false,
            validate: {
                isAlpha: true,
-               allowEmpty: false
+               notEmpty: false
            }
        },
        creative: {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
-               allowEmpty: true
+               notEmpty: true
            }
        },
        social: {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
-               allowEmpty: true
+               notEmpty: true
            }
        },
        services: {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
-               allowEmpty: true
+               notEmpty: true
            }
        }
     });

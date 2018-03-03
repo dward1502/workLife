@@ -49,27 +49,31 @@ $("#submit").on("click", function (event) {
 
     var newRegUser = {
         firstname: $("#firstName").val().trim(),
-        lastname: $("#lastName").val().trim(),
+        email: $("#email").val().trim(),
         username: $("#userName").val().trim(),
         password: $("#password").val().trim(),
         age: $("#age").val(),
         married: $('.mar:checked').val(),
-        children: $(".kid:checked").val(),
-        parents: $(".par:checked").val(),
-        exercise: $(".ex:checked").val(),
-        healthy: $(".health").val(),
-        work: $(".wrk:checked").val(),
+        children: $('.kid:checked').val(),
+        parents: $('.par:checked').val(),
+        exercise: $('.ex:checked').val(),
+        healthy: $('.health:checked').val(),
+        work: $('.wrk:checked').val(),
         creative: creative,
         social: social,
         services: service
     };
+    console.log('children:'+$('.kid').val() + 'parents:'+$('.par').val() + 'exercise:'+$('.ex').val() + 'healthy:'+$('.health').val() + 'work:'+$('.wrk').val());
+    
     console.log(newRegUser);
 
     $.ajax("/api/users", {
         type: "POST",
         data: newRegUser
-    }).then(function () {
+    }).then(res =>{
         console.log("reg information has been sent to server");
+        console.log(res);
+        
     });
 
 });
