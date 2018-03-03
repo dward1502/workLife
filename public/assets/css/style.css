@@ -1,0 +1,550 @@
+body {
+    background: #111118;
+    margin: 0;
+}
+
+/*-------------------------------------------------
+[Login page CSS]*/
+
+.container {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    color: #FF0022;
+}
+
+.grid-cont {
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    grid-template-areas: ". . . ."". triangle triangle ." " . . . ." ". butt butt .";
+}
+
+.triangle {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    margin: auto;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 200px 200px 200px;
+    border-color: transparent transparent #0073e5 transparent;
+    z-index: 1;
+    grid-area: triangle;
+}
+
+.title {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    margin: auto;
+    z-index: 15;
+    font-size: 60px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(53, 243, 132);
+}
+
+.btn {
+    grid-area: butt;
+}
+
+.log {
+    margin: auto;
+    grid-column: 2/3;
+    grid-row: 4/5;
+}
+
+.reg {
+    margin: auto;
+    grid-column: 3/4;
+    grid-row: 4/5;
+}
+
+/*------------------------------------------------------------------
+[ Button ]*/
+
+.container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login100-form-btn {
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    background: #9152f8;
+    background: -webkit-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: -o-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: -moz-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: linear-gradient(bottom, #3ad162, #3ad1c5);
+    position: relative;
+    z-index: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.login100-form-btn::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+    color: #fff;
+}
+
+.login100-form-btn:hover:before {
+    opacity: 0;
+}
+
+button {
+    outline: none !important;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/*-----------------------------------------------------------
+[modal]*/
+
+#lean_overlay {
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    display: none;
+}
+
+.modal-content {
+    width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 55px 55px 37px 55px;
+    background: #9152f8;
+    background: -webkit-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: -o-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: -moz-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: linear-gradient(bottom, #3ad162, #3ad1c5);
+}
+
+/*------------------------------------------------------------------
+[ Modal Form ]*/
+
+.login100-form {
+    width: 100%;
+}
+
+.login100-form-logo {
+    font-size: 60px;
+    color: #333333;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 120px 120px 120px;
+    border-color: transparent transparent #0073e5 transparent;
+    z-index: 1;
+    /* background-color: #fff; */
+    margin: 0 auto;
+}
+
+.logoTitle {
+    display: grid;
+    font-size: 22px;
+    color: rgb(53, 243, 132);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    z-index: 10;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    margin-top: -60px;
+    margin-bottom: 40px;
+}
+
+.login100-form-title {
+    font-family: Poppins-Medium;
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    padding-top: 27px;
+    padding-bottom: 34px;
+}
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.24);
+    margin-bottom: 30px;
+}
+
+.input100 {
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px 0 38px;
+}
+
+/*---------------------------------------------*/
+
+.focus-input100 {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.focus-input100::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    background: #fff;
+}
+
+.focus-input100::after {
+    font-family: Material-Design-Iconic-Font;
+    font-size: 22px;
+    color: #fff;
+    content: attr(data-placeholder);
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 6px;
+    left: 0px;
+    padding-left: 5px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.input100:focus {
+    padding-left: 5px;
+}
+
+.input100:focus+.focus-input100::after {
+    top: -22px;
+    font-size: 18px;
+}
+
+.input100:focus+.focus-input100::before {
+    width: 100%;
+}
+
+input {
+    outline: none;
+    border: none;
+}
+
+/*--------------------------------------------------------------
+[Registration page CSS]*/
+
+.grid-cont-reg {
+    position: relative;
+    display: grid;
+    grid-auto-rows: 50px auto;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.regForm {
+    margin-top: 5vh;
+    background: grey;
+    grid-row: 2/8;
+    grid-column: 2/6;
+}
+
+/*---------------------------------------------------------------
+[Input page CSS]*/
+
+.grid-cont-input {
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 5px;
+    grid-auto-rows: minmax(25px, auto);
+    grid-template-areas: "butt . . . . . . user"". . . pageTitle pageTitle . . ." " . . . . . . . ." "..";
+}
+
+.back {
+    grid-area: butt;
+    grid-column: 1/1;
+    grid-row: 1/1;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.usernameDisplay {
+    grid-area: user;
+    grid-column: 7/9;
+    grid-row: 1/1;
+    margin: auto;
+    margin-right: 40px;
+    color: white;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.inputpgTitle {
+    grid-area: pageTitle;
+    grid-column: 4/6;
+    grid-row: 2/2;
+    margin: auto;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #3ad162;
+}
+
+.exTitle {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    color: #fff;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: -120px;
+}
+
+.wrktitle {
+    grid-row: 8/9;
+    grid-column: 2/3;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: -5px;
+}
+
+.lifeTitle {
+    grid-row: 14/15;
+    grid-column: 2/3;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: -5px;
+}
+
+.exDiv {
+    grid-row: 3/8;
+    grid-column: 2/8;
+    background: #555555;
+    margin-left: -50px;
+}
+
+.wrkDiv {
+    grid-row: 9/14;
+    grid-column: 2/8;
+    background: #555555;
+    margin-left: -50px;
+}
+
+.lifeDiv {
+    grid-row: 15/20;
+    grid-column: 2/8;
+    background: #555555;
+    margin-left: -50px;
+}
+
+.submitInput {
+    grid-row: 20/21;
+    grid-column: 4/6;
+    width: 250px;
+    margin-top: 10px;
+}
+
+.exForm {
+    display: grid;
+    grid-gap: 3px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px 50px 50px;
+}
+
+.i_q_1 {
+    grid-row: 1/1;
+    grid-column: 1/1;
+}
+
+.i_q_2 {
+    grid-row: 2/2;
+    grid-column: 1/1;
+}
+
+.i_q_3 {
+    grid-row: 3/3;
+    grid-column: 1/1;
+}
+
+/*-------------------------------------------------------------------------------
+[home page CSS]*/
+
+.login100-form-btn-home {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: #555555;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 180px;
+    height: 100px;
+    border-radius: 25px;
+    background: #3ad162;
+    background: -webkit-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: -o-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: -moz-linear-gradient(bottom, #3ad162, #3ad1c5);
+    background: linear-gradient(bottom, #3ad162, #3ad1c5);
+    position: relative;
+    z-index: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.login100-form-btn-home::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: #3ad162;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.login100-form-btn-home:hover {
+    color: #0073e5;
+}
+
+.login100-form-btn-home:hover:before {
+    opacity: 0;
+}
+
+button {
+    outline: none !important;
+    border: none;
+    /* background: transparent; */
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.login100-form-title-home {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 35px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    padding-top: 27px;
+    padding-bottom: 34px;
+}
+
+/*-------------------------------------------------------
+[Reports page CSS]*/
+
+.reportsTitle {
+    grid-row: 1/1;
+    grid-column: 4/6;
+    color: white;
+    margin: auto;
+    font-size: 42px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.chartDiv {
+    grid-row: 3/13;
+    grid-column: 2/8;
+    background: #555555;
+    border-radius: 5vh;
+    margin-left: -50px;
+}
+
+.suggestTitle {
+    grid-row: 14/14;
+    grid-column: 4/6;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 42px;
+}
+
+.suggestDiv {
+    grid-row: 15/20;
+    grid-column: 2/8;
+    background: #555555;
+    border-radius: 5vh;
+}
