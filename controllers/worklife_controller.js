@@ -120,9 +120,10 @@ router.post('/api/users', function (req, res) {
             work: req.body.work,
             creative: createString(req.body.creative),
             social: createString(req.body.social),
-            services: createString(req.body.services)
+            services: createString(req.body.services),
+            userId: dbUser.id
         }).then(function(dbSurvey){
-            dbSurvey.belongsTo(User, {foreignKey: dbUser.id});
+            console.log("Setting up relatinos");
             res.render("home", dbUser);
         }).catch(function(err){
             res.json(err);
