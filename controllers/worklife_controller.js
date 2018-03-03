@@ -22,6 +22,11 @@ router.get('/', function (req, res) {
     res.render("index");
 });
 
+//Route to home
+router.get('/home', function (req, res) {
+    res.render("home");
+});
+
 //Route to registration
 router.get('/register', function(req, res){
     res.render("register");
@@ -85,6 +90,12 @@ router.get('/input', function(req, res){
     }).then(function (dbUser) {
         res.render("input", dbUser);
     });
+});
+
+var dothis = new Promise(function(resolve, reject){
+    dbSurvey.belongsTo(User, { dbUser.id });
+    err ? console.log(err) : console.log('No error...');
+    resolve('success');
 });
 
 //Route to post the user data on registration. TO BE DONE:
