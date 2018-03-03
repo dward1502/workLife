@@ -2,7 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var cryptoRandomString = require('crypto-random-string');
-
+var sequelize = require('sequelize');
+var Op = sequelize.Op;
 
 // Import the sequelize model
 var db = require('../models');
@@ -45,7 +46,7 @@ router.get('/survey', function(req, res){
 //Route to the results. TO BE DONE: get the data for the specific user,
 //calculate their values per category, then send it back to the client.
 //Will also need to get data from the suggestions database.
-router.get('/results', function(req, res){
+router.get('/reports', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
@@ -53,12 +54,11 @@ router.get('/results', function(req, res){
                 [Op.like]: req.body.username
             },
             password: {
-                [Op.link]: req.body.password
+                [Op.like]: req.body.password
             }
         }
     }).then(function (dbUser) {
-        res.json(dbUser);
-        res.render("results", dbUser);
+        res.render("reports", dbUser);
     });
 });
 
@@ -75,7 +75,6 @@ router.get('/input', function(req, res){
             }
         }
     }).then(function (dbUser) {
-        res.json(dbUser);
         res.render("input", dbUser);
     });
 });
@@ -100,8 +99,23 @@ router.post('/api/users', function (req, res) {
         exercise_points: req.body.exercisePoints,
     }).then(function (dbUser) {
         console.log("Item added: ", dbUser);
-        res.json(dbUser);
-        res.render("home",dbUser)
+        db.Survey.create({
+            age: req.body.age,
+            married: req.body.married,
+            children: req.body.children,
+            parents: req.body.children,
+            exercise: req.body.exercise,
+            health: req.body.healthy,
+            work: req.body.work,
+            creative: req.body.creative,
+            social: req.body.social,
+            services: req.body.services
+        }).then(function(dbSurvey){
+            dbSurvey.belongsTo(User, {foreignKey: dbUser.id});
+            res.render("home", dbUser);
+        }).catch(function(err){
+            res.json(err);
+        });
     }).catch(function(err){
         res.json(err);
     });

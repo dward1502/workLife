@@ -56,7 +56,7 @@ $("#submit").on("click", function (event) {
         married: $('.mar:checked').val(),
         children: $(".kid:checked").val(),
         parents: $(".par:checked").val(),
-        excercise: $(".ex:checked").val(),
+        exercise: $(".ex:checked").val(),
         healthy: $(".health").val(),
         work: $(".wrk:checked").val(),
         creative: creative,
