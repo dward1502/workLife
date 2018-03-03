@@ -99,7 +99,23 @@ router.post('/api/users', function (req, res) {
         exercise_points: req.body.exercisePoints,
     }).then(function (dbUser) {
         console.log("Item added: ", dbUser);
-        res.render("home", dbUser)
+        db.Survey.create({
+            age: req.body.age,
+            married: req.body.married,
+            children: req.body.children,
+            parents: req.body.children,
+            exercise: req.body.exercise,
+            health: req.body.healthy,
+            work: req.body.work,
+            creative: req.body.creative,
+            social: req.body.social,
+            services: req.body.services
+        }).then(function(dbSurvey){
+            dbSurvey.belongsTo(User, {foreignKey: dbUser.id});
+            res.render("home", dbUser);
+        }).catch(function(err){
+            res.json(err);
+        });
     }).catch(function(err){
         res.json(err);
     });
