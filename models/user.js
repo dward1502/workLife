@@ -1,3 +1,5 @@
+//NEED TO DISCUSS HOW WE ARE SAVING THE ANSWERS TO THE SURVEY. I RECOMMEND A SEPARATE MODEL FOR THE ANSWERS
+//WITH A FOREIGN KEY TO THEIR USER.
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define("User", {
         email: {
