@@ -1,3 +1,5 @@
+CREATE DATABASE worklife_db;
+
 use worklife_db;
 
 CREATE TABLE Suggestions (

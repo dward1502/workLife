@@ -33,13 +33,13 @@ module.exports = function (sequelize, DataTypes) {
                 notEmpty: true
             }
         },
-        answers: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
-        },
+        // answers: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     validate: {
+        //         notEmpty: true
+        //     }
+        // },
         work_points: {
             type: DataTypes.INTEGER,
             allowNull: false,

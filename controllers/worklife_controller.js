@@ -8,7 +8,15 @@ var Op = sequelize.Op;
 // Import the sequelize model
 var db = require('../models');
 
+function createString(arr){
+    newString = '';
+    arr.forEach(element => {
+        newString += element;
+        newString += ",";
+    });
 
+    return newString;
+}
 //Route to index
 router.get('/', function (req, res) {
     res.render("index");
@@ -93,23 +101,26 @@ router.post('/api/users', function (req, res) {
         username: req.body.username,
         password: req.body.password,
         auth: authToken,
-        answers: req.body.answers,
-        work_points: req.body.workPoints,
-        life_points: req.body.lifePoints,
-        exercise_points: req.body.exercisePoints,
+        work_points: 0,//req.body.workPoints,
+        life_points: 0,//req.body.lifePoints,
+        exercise_points: 0,//req.body.exercisePoints,
     }).then(function (dbUser) {
-        console.log("Item added: ", dbUser);
+        console.log("Item added dbUser: ", dbUser);
+        console.log("Item added REQ: ", req.body);
+        console.log("creative array => str: " + createString(req.body.creative));
+        console.log("creative array => str: " + createString(req.body.social));
+        console.log("creative array => str: " + createString(req.body.services));       
         db.Survey.create({
             age: req.body.age,
             married: req.body.married,
             children: req.body.children,
             parents: req.body.children,
             exercise: req.body.exercise,
-            health: req.body.healthy,
+            healthy: req.body.healthy,
             work: req.body.work,
-            creative: req.body.creative,
-            social: req.body.social,
-            services: req.body.services
+            creative: createString(req.body.creative),
+            social: createString(req.body.social),
+            services: createString(req.body.services)
         }).then(function(dbSurvey){
             dbSurvey.belongsTo(User, {foreignKey: dbUser.id});
             res.render("home", dbUser);
