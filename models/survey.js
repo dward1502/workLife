@@ -1,4 +1,6 @@
 //Model to handle the survey data.
+var User = require('./user');
+
 module.exports = function(sequelize, DataTypes){
     var Survey = sequelize.define("Survey", {
         age: {
@@ -76,6 +78,10 @@ module.exports = function(sequelize, DataTypes){
            validate: {
                notEmpty: true
            }
+       },
+       userId: {
+           type: DataTypes.INTEGER,
+           allowNull: false
        }
     });
     return Survey;
