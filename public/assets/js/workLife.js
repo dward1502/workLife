@@ -22,8 +22,10 @@ $("#loginBtn").on("click", function (event) {
     $.ajax("/login", {
         type: "POST",
         data: userLogin
-    }).then(function () {
+    }).then(res => {
         console.log("username has been sent to server");
+
+        window.location  = "/home/" + res.auth;
     });
 
     event.preventDefault();
