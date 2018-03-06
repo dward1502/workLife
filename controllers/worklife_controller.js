@@ -43,7 +43,13 @@ router.get('/home/:authToken', function(req, res){
             }
         }
     }).then(function (dbUser) {
-        res.render("home", dbUser);
+
+        var hbsObject = {
+            user: dbUser
+        }
+        console.log(hbsObject);
+
+        res.render("home", hbsObject);
     });
 });
 
@@ -80,19 +86,20 @@ router.get('/input/:authToken', function(req, res){
                 [Op.like]: req.body.username
             },
             password: {
-                [Op.link]: req.body.password
+                [Op.like]: req.body.password
             }
         }
     }).then(function (dbUser) {
-        res.render("input", dbUser);
+
+        var hbsObject = {
+            user: dbUser
+        }
+        console.log(hbsObject);
+        
+        res.render("input", hbsObject);
     });
 });
 
-var dothis = new Promise(function(resolve, reject){
-    dbSurvey.belongsTo(User, { dbUser.id });
-    err ? console.log(err) : console.log('No error...');
-    resolve('success');
-});
 
 //Route to post the user data on registration. TO BE DONE:
 //Determine whether we can just pass back the JSON or 
