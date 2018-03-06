@@ -24,7 +24,7 @@ $("#loginBtn").on("click", function (event) {
         data: userLogin
     }).then(res => {
         console.log("username has been sent to server");
-
+        var currUser = localStorage.setItem("currUser", res);
         window.location  = "/home/" + res.auth;
     });
 
@@ -74,6 +74,7 @@ $("#submit").on("click", function (event) {
         data: newRegUser
     }).then(res => {
 
+        var currUser = localStorage.setItem("currUser");
         window.location = "/home/" + res.auth;      
         
     });
@@ -92,14 +93,19 @@ $("#subInput").on("click", function (event) {
         lifQ5: $(".work5:checked").val(), lifQ6: $(".work6:checked").val(), lifQ7: $(".work7:checked").val(), lifQ8: $(".work8:checked").val(),
         lifQ9: $(".work9:checked").val()
     }
+
+    var currUser = localStorage.getItem("currUser");
+
     console.log(wkInput);
-    $.ajax("/api/input", {
+    $.ajax("/api/input/" + currUser.auth, {
         type: "POST",
         data: wkInput
     }).then(res => {
         console.log("weekly input sent to server");
 
         console.log(res);
+
+        window.location = '/reports/' + currUser.auth;
     })
 });
 

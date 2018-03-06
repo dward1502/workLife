@@ -61,16 +61,11 @@ router.get('/survey', function(req, res){
 //Route to the results. TO BE DONE: get the data for the specific user,
 //calculate their values per category, then send it back to the client.
 //Will also need to get data from the suggestions database.
-router.get('/reports:authToken', function(req, res){
+router.get('/reports/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
-            username: {
-                [Op.like]: req.body.username
-            },
-            password: {
-                [Op.like]: req.body.password
-            }
+            auth: req.params.authToken
         }
     }).then(function (dbUser) {
         res.render("reports", dbUser);
