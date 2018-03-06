@@ -29,19 +29,15 @@ router.get('/register', function(req, res){
 
 //Route to homepage. TO BE DONE: get the data for the specific user
 //and then pass back user info to the page.
-router.get('/home', function(req, res){
+router.get('/home/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
-            username: {
-                [Op.like]: req.body.username
-            },
-            password: {
-                [Op.link]: req.body.password
+            auth: {
+                [Op.like]: req.params.authToken
             }
         }
     }).then(function (dbUser) {
-        res.json(dbUser);
         res.render("home", dbUser);
     });
 });
@@ -54,7 +50,7 @@ router.get('/survey', function(req, res){
 //Route to the results. TO BE DONE: get the data for the specific user,
 //calculate their values per category, then send it back to the client.
 //Will also need to get data from the suggestions database.
-router.get('/reports', function(req, res){
+router.get('/reports:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
@@ -71,7 +67,7 @@ router.get('/reports', function(req, res){
 });
 
 //Route to the input. TO BE DONE: get the data for the specific user.
-router.get('/input', function(req, res){
+router.get('/input/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
@@ -124,7 +120,7 @@ router.post('/api/users', function (req, res) {
             userId: dbUser.id
         }).then(function(dbSurvey){
             console.log("Setting up relatinos");
-            res.render("home", dbUser);
+            res.json(dbUser);
         }).catch(function(err){
             res.json(err);
         });
@@ -147,7 +143,6 @@ router.put('/api/users', function(req, res){
         }
     }).then(function(dbUser){
         res.json(dbUser);
-        res.render("home", dbUser);
     }).catch(function(err){
         res.json(err);
     });
@@ -178,12 +173,11 @@ router.post('/login', function(req, res){
                 [Op.like]: req.body.username
             },
             password: {
-                [Op.link]: req.body.password
+                [Op.like]: req.body.password
             }
         }
     }).then(function(dbUser){
         res.json(dbUser);
-        res.render("home", dbUser);
     }).catch(function(err){
         res.json(err);
     });

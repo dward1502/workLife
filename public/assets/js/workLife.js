@@ -22,8 +22,10 @@ $("#loginBtn").on("click", function (event) {
     $.ajax("/login", {
         type: "POST",
         data: userLogin
-    }).then(function () {
+    }).then(res => {
         console.log("username has been sent to server");
+
+        window.location  = "/home/" + res.auth;
     });
 
     event.preventDefault();
@@ -70,9 +72,10 @@ $("#submit").on("click", function (event) {
     $.ajax("/api/users", {
         type: "POST",
         data: newRegUser
-    }).then(res =>{
-        console.log("reg information has been sent to server");
-        console.log(res);        
+    }).then(res => {
+
+        window.location = "/home/" + res.auth;      
+        
     });
 });
 
