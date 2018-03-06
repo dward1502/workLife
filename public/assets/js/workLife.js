@@ -87,6 +87,7 @@ $("#submit").on("click", function (event) {
 
 $("#subInput").on("click", function (event) {
     event.preventDefault();
+    var currUser = localStorage.getItem("currUser");
     var wkInput = {
         exQ1: $(".work1:checked").val(), exQ1: $(".work2:checked").val(), exQ3: $(".work3:checked").val(), exQ4: $(".work4:checked").val(),
         exQ5: $(".work5:checked").val(), exQ6: $(".work6:checked").val(), exQ7: $(".work7:checked").val(), exQ8: $(".work8:checked").val(),
@@ -96,11 +97,12 @@ $("#subInput").on("click", function (event) {
         wrkQ9: $(".work9:checked").val(),
         lifQ1: $(".work1:checked").val(), lifQ2: $(".work2:checked").val(), lifQ3: $(".work3:checked").val(), lifQ4: $(".work4:checked").val(),
         lifQ5: $(".work5:checked").val(), lifQ6: $(".work6:checked").val(), lifQ7: $(".work7:checked").val(), lifQ8: $(".work8:checked").val(),
-        lifQ9: $(".work9:checked").val()
+        lifQ9: $(".work9:checked").val(),
+        currUser: currUser
     }
 
-    var currUser = localStorage.getItem("currUser");
-
+    
+    //CREATE PUT METHOD TO UPDATE USER'S POINTS AT THIS URL 
     console.log(wkInput);
     $.ajax("/api/input/" + currUser.auth, {
         type: "POST",
