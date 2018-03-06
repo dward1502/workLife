@@ -22,6 +22,11 @@ router.get('/', function (req, res) {
     res.render("index");
 });
 
+//Route to home
+router.get('/home', function (req, res) {
+    res.render("home");
+});
+
 //Route to registration
 router.get('/register', function(req, res){
     res.render("register");
@@ -38,7 +43,13 @@ router.get('/home/:authToken', function(req, res){
             }
         }
     }).then(function (dbUser) {
-        res.render("home", dbUser);
+
+        var hbsObject = {
+            user: dbUser
+        }
+        console.log(hbsObject);
+
+        res.render("home", hbsObject);
     });
 });
 
@@ -75,13 +86,20 @@ router.get('/input/:authToken', function(req, res){
                 [Op.like]: req.body.username
             },
             password: {
-                [Op.link]: req.body.password
+                [Op.like]: req.body.password
             }
         }
     }).then(function (dbUser) {
-        res.render("input", dbUser);
+
+        var hbsObject = {
+            user: dbUser
+        }
+        console.log(hbsObject);
+        
+        res.render("input", hbsObject);
     });
 });
+
 
 //Route to post the user data on registration. TO BE DONE:
 //Determine whether we can just pass back the JSON or 
