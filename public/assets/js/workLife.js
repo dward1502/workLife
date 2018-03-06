@@ -1,3 +1,6 @@
+let currLife = 0;
+let currWork = 0;
+let currExercise = 0;
 $(document).ready(function () {
     $("#loginModal").hide();
 });
@@ -22,8 +25,8 @@ $("#loginBtn").on("click", function (event) {
     $.ajax("/login", {
         type: "POST",
         data: userLogin
-    }).then(function () {
-        console.log("username has been sent to server");
+    }).then(res => {
+        window.location = "/home/" + res.auth;
     });
 
     event.preventDefault();
@@ -34,7 +37,6 @@ $("#submit").on("click", function (event) {
 
     console.log("register btn works");
     var physical = [];
-    var creative = [];
     var social = [];
     var service = [];
 
@@ -72,8 +74,9 @@ $("#submit").on("click", function (event) {
         type: "POST",
         data: newRegUser
     }).then(res =>{
-        console.log("reg information has been sent to server");
-        console.log(res);        
+        console.log("res is: ", res);
+        window.location = "/home/" + res.auth;
+
     });
 });
 
@@ -142,10 +145,10 @@ var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ["Work", "Excercise", "Life"],
+        labels: ["Work", "Exercise", "Life"],
         datasets: [{
             label: '# of Votes',
-            data: [currWork, currExcercise, currLife,],
+            data: [currWork, currExercise, currLife,],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
