@@ -22,8 +22,10 @@ $("#loginBtn").on("click", function (event) {
     $.ajax("/login", {
         type: "POST",
         data: userLogin
-    }).then(function () {
+    }).then(res => {
         console.log("username has been sent to server");
+
+        window.location  = "/home/" + res.auth;
     });
 
     event.preventDefault();
@@ -70,12 +72,35 @@ $("#submit").on("click", function (event) {
     $.ajax("/api/users", {
         type: "POST",
         data: newRegUser
-    }).then(res =>{
-        console.log("reg information has been sent to server");
-        console.log(res);
+    }).then(res => {
+
+        window.location = "/home/" + res.auth;      
         
     });
+});
 
+$("#subInput").on("click", function (event) {
+    event.preventDefault();
+    var wkInput = {
+        exQ1: $(".work1:checked").val(), exQ1: $(".work2:checked").val(), exQ3: $(".work3:checked").val(), exQ4: $(".work4:checked").val(),
+        exQ5: $(".work5:checked").val(), exQ6: $(".work6:checked").val(), exQ7: $(".work7:checked").val(), exQ8: $(".work8:checked").val(),
+        exQ9: $(".work9:checked").val(),
+        wrkQ1: $(".work1:checked").val(), wrkQ2: $(".work2:checked").val(), wrkQ3: $(".work3:checked").val(), wrkQ4: $(".work4:checked").val(),
+        wrkQ5: $(".work5:checked").val(), wrkQ6: $(".work6:checked").val(), wrkQ7: $(".work7:checked").val(), wrkQ8: $(".work8:checked").val(),
+        wrkQ9: $(".work9:checked").val(),
+        lifQ1: $(".work1:checked").val(), lifQ2: $(".work2:checked").val(), lifQ3: $(".work3:checked").val(), lifQ4: $(".work4:checked").val(),
+        lifQ5: $(".work5:checked").val(), lifQ6: $(".work6:checked").val(), lifQ7: $(".work7:checked").val(), lifQ8: $(".work8:checked").val(),
+        lifQ9: $(".work9:checked").val()
+    }
+    console.log(wkInput);
+    $.ajax("/api/input", {
+        type: "POST",
+        data: wkInput
+    }).then(res => {
+        console.log("weekly input sent to server");
+
+        console.log(res);
+    })
 });
 
 
