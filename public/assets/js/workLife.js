@@ -1,3 +1,6 @@
+let currLife = 0;
+let currWork = 0;
+let currExercise = 0;
 $(document).ready(function () {
     $("#loginModal").hide();
 });
@@ -35,19 +38,19 @@ $("#submit").on("click", function (event) {
     event.preventDefault();
 
     console.log("register btn works");
-    var creative = [];
+    var physical = [];
     var social = [];
     var service = [];
 
     $.each($("input[name='service']:checked"), function () {
-        creative.push($(this).val());
+        physical.push($(this).val());
     });
     $.each($("input[name='social']:checked"), function () {
         social.push($(this).val());
     });
     $.each($("input[name=service]:checked"), function () {
         service.push($(this).val());
-    });
+    });    
 
     var newRegUser = {
         firstname: $("#firstName").val().trim(),
@@ -61,7 +64,7 @@ $("#submit").on("click", function (event) {
         exercise: $('.ex:checked').val(),
         healthy: $('.health:checked').val(),
         work: $('.wrk:checked').val(),
-        creative: creative,
+        physical: physical,
         social: social,
         services: service
     };
@@ -72,7 +75,9 @@ $("#submit").on("click", function (event) {
     $.ajax("/api/users", {
         type: "POST",
         data: newRegUser
-    }).then(res => {
+    }).then(res =>{
+        console.log("res is: ", res);
+        window.location = "/home/" + res.auth;
 
         var currUser = localStorage.setItem("currUser");
         window.location = "/home/" + res.auth;      
@@ -82,6 +87,7 @@ $("#submit").on("click", function (event) {
 
 $("#subInput").on("click", function (event) {
     event.preventDefault();
+    var currUser = localStorage.getItem("currUser");
     var wkInput = {
         exQ1: $(".work1:checked").val(), exQ1: $(".work2:checked").val(), exQ3: $(".work3:checked").val(), exQ4: $(".work4:checked").val(),
         exQ5: $(".work5:checked").val(), exQ6: $(".work6:checked").val(), exQ7: $(".work7:checked").val(), exQ8: $(".work8:checked").val(),
@@ -91,11 +97,12 @@ $("#subInput").on("click", function (event) {
         wrkQ9: $(".work9:checked").val(),
         lifQ1: $(".work1:checked").val(), lifQ2: $(".work2:checked").val(), lifQ3: $(".work3:checked").val(), lifQ4: $(".work4:checked").val(),
         lifQ5: $(".work5:checked").val(), lifQ6: $(".work6:checked").val(), lifQ7: $(".work7:checked").val(), lifQ8: $(".work8:checked").val(),
-        lifQ9: $(".work9:checked").val()
+        lifQ9: $(".work9:checked").val(),
+        currUser: currUser
     }
 
-    var currUser = localStorage.getItem("currUser");
-
+    
+    //CREATE PUT METHOD TO UPDATE USER'S POINTS AT THIS URL 
     console.log(wkInput);
     $.ajax("/api/input/" + currUser.auth, {
         type: "POST",
@@ -108,6 +115,8 @@ $("#subInput").on("click", function (event) {
         window.location = '/reports/' + currUser.auth;
     })
 });
+
+///grab data from user to display for user report page
 
 
 var w = window.innerWidth;
@@ -141,3 +150,36 @@ function animate() {
 initialise();
 resize();
 animate();
+
+
+//chart js javascript
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Work", "Exercise", "Life"],
+        datasets: [{
+            label: '# of Votes',
+            data: [currWork, currExercise, currLife,],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        legend: {
+            labels: {
+                fontColor: '#fff',
+                fontSize: 16
+            }
+        }
+    }
+});
