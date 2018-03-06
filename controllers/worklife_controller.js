@@ -55,7 +55,7 @@ router.get('/survey', function(req, res){
 //Route to the results. TO BE DONE: get the data for the specific user,
 //calculate their values per category, then send it back to the client.
 //Will also need to get data from the suggestions database.
-router.get('/reports', function(req, res){
+router.get('/reports:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
@@ -72,7 +72,7 @@ router.get('/reports', function(req, res){
 });
 
 //Route to the input. TO BE DONE: get the data for the specific user.
-router.get('/input', function(req, res){
+router.get('/input/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
@@ -154,7 +154,6 @@ router.put('/api/users', function(req, res){
         }
     }).then(function(dbUser){
         res.json(dbUser);
-        res.render("home", dbUser);
     }).catch(function(err){
         res.json(err);
     });
@@ -190,7 +189,6 @@ router.post('/login', function(req, res){
         }
     }).then(function(dbUser){
         res.json(dbUser);
-        res.render("home", dbUser);
     }).catch(function(err){
         res.json(err);
     });
