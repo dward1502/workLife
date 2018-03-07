@@ -5,6 +5,9 @@ $(document).ready(function () {
     $("#loginModal").hide();
 });
 
+var currLife = 0;
+var currWork = 0;
+var currExcercise = 0;
 
 $('#login').leanModal({
     top: 100,
