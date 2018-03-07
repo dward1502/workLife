@@ -22,11 +22,6 @@ router.get('/', function (req, res) {
     res.render("index");
 });
 
-//Route to home
-router.get('/home', function (req, res) {
-    res.render("home");
-});
-
 //Route to registration
 router.get('/register', function(req, res){
     res.render("register");
@@ -47,7 +42,6 @@ router.get('/home/:authToken', function(req, res){
         var hbsObject = {
             user: dbUser
         }
-        console.log(hbsObject);
 
         res.render("home", hbsObject);
     });
@@ -61,16 +55,11 @@ router.get('/survey', function(req, res){
 //Route to the results. TO BE DONE: get the data for the specific user,
 //calculate their values per category, then send it back to the client.
 //Will also need to get data from the suggestions database.
-router.get('/reports:authToken', function(req, res){
+router.get('/reports/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
-            username: {
-                [Op.like]: req.body.username
-            },
-            password: {
-                [Op.like]: req.body.password
-            }
+            auth: req.params.authToken
         }
     }).then(function (dbUser) {
         res.render("reports", dbUser);
@@ -118,12 +107,7 @@ router.post('/api/users', function (req, res) {
         work_points: 0,//req.body.workPoints,
         life_points: 0,//req.body.lifePoints,
         exercise_points: 0,//req.body.exercisePoints,
-    }).then(function (dbUser) {
-        console.log("Item added dbUser: ", dbUser);
-        console.log("Item added REQ: ", req.body);
-        console.log("creative array => str: " + createString(req.body.creative));
-        console.log("creative array => str: " + createString(req.body.social));
-        console.log("creative array => str: " + createString(req.body.services));       
+    }).then(function (dbUser) {   
         db.Survey.create({
             age: req.body.age,
             married: req.body.married,
@@ -132,12 +116,11 @@ router.post('/api/users', function (req, res) {
             exercise: req.body.exercise,
             healthy: req.body.healthy,
             work: req.body.work,
-            creative: createString(req.body.creative),
+            physical: createString(req.body.physical),
             social: createString(req.body.social),
             services: createString(req.body.services),
             userId: dbUser.id
         }).then(function(dbSurvey){
-            console.log("Setting up relatinos");
             res.json(dbUser);
         }).catch(function(err){
             res.json(err);
@@ -164,6 +147,26 @@ router.put('/api/users', function(req, res){
     }).catch(function(err){
         res.json(err);
     });
+});
+
+router.put('/api/users/:authToken', function(req, res){
+    console.log(req.body);
+    db.User.update({
+        work_points: req.body.currWork + 1,
+        life_points: req.body.currLife + 1,
+        exercise_points: req.body.currExercise + 1,
+        previous_exercise: req.body.currExercise,
+        previous_work: req.body.currWork,
+        previous_life: req.body.currLife
+    }, {
+            where: {
+                auth: req.params.authToken
+            }
+        }).then(function (dbUser) {
+            res.json(dbUser);
+        }).catch(function (err) {
+            res.json(err);
+        });
 });
 
 
