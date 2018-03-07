@@ -58,7 +58,7 @@ module.exports = function(sequelize, DataTypes){
                notEmpty: false
            }
        },
-       creative: {
+       physical: {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
