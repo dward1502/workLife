@@ -548,3 +548,15 @@ button:hover {
     background: #555555;
     border-radius: 5vh;
 }
+/*----------------------------------
+[Green sock ]*/
+
+#logo {
+    position: absolute;
+    left: 37%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(53, 243, 132);
+}
