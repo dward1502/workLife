@@ -1,6 +1,7 @@
 let currLife = 0;
 let currWork = 0;
 let currExercise = 0;
+
 $(document).ready(function () {
     $("#loginModal").hide();
 });
@@ -15,32 +16,41 @@ $('#login').leanModal({
     closeButton: ".close"
 });
 
+/**
+ * LOGIN
+ */
 $("#loginBtn").on("click", function (event) {
-    console.log("login btn works");
 
     var userLogin = {
         username: $("#username").val().trim(),
         password: $("#password").val().trim()
     };
-    console.log(userLogin);
 
 
     $.ajax("/login", {
         type: "POST",
         data: userLogin
-    }).then(res => {
-        console.log("username has been sent to server");
-        var currUser = localStorage.setItem("currUser", res);
-        window.location  = "/home/" + res.auth;
+    }).then((res) => {
+        console.log('res is: ', res.auth);
+        localStorage.clear();
+        localStorage.setItem("currAuth", res.auth);
+        localStorage.setItem("currWork", res.work_points);
+        localStorage.setItem("currExercise", res.exercise_points);
+        localStorage.setItem("currLife", res.life_points);
+
+        console.log(localStorage.getItem("currAuth"));
+        window.location  = "/home/" + localStorage.getItem("currAuth");
     });
 
     event.preventDefault();
 });
 
+/**
+ * REGISTER
+ */
 $("#submit").on("click", function (event) {
     event.preventDefault();
 
-    console.log("register btn works");
     var physical = [];
     var social = [];
     var service = [];
@@ -71,26 +81,33 @@ $("#submit").on("click", function (event) {
         social: social,
         services: service
     };
-    console.log('children:'+$('.kid').val() + 'parents:'+$('.par').val() + 'exercise:'+$('.ex').val() + 'healthy:'+$('.health').val() + 'work:'+$('.wrk').val());
+    
     
     console.log(newRegUser);
 
     $.ajax("/api/users", {
         type: "POST",
         data: newRegUser
-    }).then(res =>{
-        console.log("res is: ", res);
-        window.location = "/home/" + res.auth;
+    }).then((res) =>{
+        
+        localStorage.clear();
+        localStorage.setItem("currAuth", res.auth);
+        localStorage.setItem("currWork", res.work_points);
+        localStorage.setItem("currExercise", res.exercise_points);
+        localStorage.setItem("currLife", res.life_points);
 
-        var currUser = localStorage.setItem("currUser");
-        window.location = "/home/" + res.auth;      
+        console.log(localStorage.getItem("currAuth"));
+        window.location = "/home/" + localStorage.getItem("currAuth");
         
     });
 });
 
+/**
+ * WEEKLY INPUT
+ */
 $("#subInput").on("click", function (event) {
     event.preventDefault();
-    var currUser = localStorage.getItem("currUser");
+    
     var wkInput = {
         exQ1: $(".work1:checked").val(), exQ1: $(".work2:checked").val(), exQ3: $(".work3:checked").val(), exQ4: $(".work4:checked").val(),
         exQ5: $(".work5:checked").val(), exQ6: $(".work6:checked").val(), exQ7: $(".work7:checked").val(), exQ8: $(".work8:checked").val(),
@@ -101,21 +118,25 @@ $("#subInput").on("click", function (event) {
         lifQ1: $(".work1:checked").val(), lifQ2: $(".work2:checked").val(), lifQ3: $(".work3:checked").val(), lifQ4: $(".work4:checked").val(),
         lifQ5: $(".work5:checked").val(), lifQ6: $(".work6:checked").val(), lifQ7: $(".work7:checked").val(), lifQ8: $(".work8:checked").val(),
         lifQ9: $(".work9:checked").val(),
-        currUser: currUser
+        currExercise: localStorage.getItem("currExercise"),
+        currLife: localStorage.getItem("currLife"),
+        currWork: localStorage.getItem("currWork")
     }
 
     
     //CREATE PUT METHOD TO UPDATE USER'S POINTS AT THIS URL 
     console.log(wkInput);
-    $.ajax("/api/input/" + currUser.auth, {
-        type: "POST",
+    console.log('currUser is: ', localStorage.getItem("currAuth"));
+    var currAuth = localStorage.getItem("currAuth")
+    $.ajax("/api/users/" + currAuth, {
+        type: "PUT",
         data: wkInput
-    }).then(res => {
+    }).then((res) => {
         console.log("weekly input sent to server");
 
         console.log(res);
 
-        window.location = '/reports/' + currUser.auth;
+        window.location = '/reports/' + currAuth;
     })
 });
 
