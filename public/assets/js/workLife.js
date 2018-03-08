@@ -1,5 +1,17 @@
 // var calcPoints = require('./controllers/worklife_controller.js');
 
+// var requirejs = require('requirejs');
+
+// requirejs.config({
+//     //Pass the top-level main.js/index.js require
+//     //function to requirejs so that node modules
+//     //are loaded relative to the top-level JS file.
+//     nodeRequire: require
+// });
+
+// requirejs([]);
+
+
 $(document).ready(function () {
     $("#loginModal").hide();
 });
@@ -42,6 +54,19 @@ $("#loginBtn").on("click", function (event) {
 
     event.preventDefault();
 });
+
+$('#logoutBtn').on('click', function (event) {
+    
+    var empty = {};
+
+    $.ajax("/logout", {
+        type: "POST",
+        data: empty
+    }).then(res => {
+        localStorage.clear();
+        window.location = '/';
+    })
+})
 
 /**
  * REGISTER

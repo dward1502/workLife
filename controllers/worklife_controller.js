@@ -234,7 +234,12 @@ router.post('/login', function(req, res){
 
 });
 
+router.post('/logout', function(req, res){
+    res.json({});
+})
+
 // Export routes for server.js to use.
 module.exports = {
-    router: router
+    router: router,
+    calcPoint: calcPoint
 };
