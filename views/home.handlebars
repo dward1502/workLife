@@ -8,12 +8,13 @@
         <img src="../../assets/images/illuminati2.png" alt="Iluminati pyramid img">
     </div>
 
+        <h1 class="user">Welcome, {{user.username}}. <br> Find your zen here... <br> Open your third eye...</h1>
+
         {{!-- <h1 class="title">Work Balance Life</h1> --}}
         <a class="logout" id="logoutBtn" href="#">Logout</a>
 
-        <a class="login100-form-btn-home log " id="inputpage" href="/input/{{user.auth}}">Input Your Weekly Exercise, Work and Life Information</a>
+        <a class="login100-form-btn-home log " id="inputpage" href="/input/{{user.auth}}">Input Your Week</a>
         <a class="login100-form-btn-home reg" id="reportspage" href="/reports/{{user.auth}}">Weekly Results</a>
-        <h1>{{user.username}}</h1>
     </div>
 
 
