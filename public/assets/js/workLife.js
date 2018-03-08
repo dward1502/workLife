@@ -1,14 +1,13 @@
-let currLife = 0;
-let currWork = 0;
-let currExercise = 0;
-
+// let currLife = 0;
+// let currWork = 0;
+// let currExercise = 0;
 $(document).ready(function () {
     $("#loginModal").hide();
 });
 
-var currLife = 0;
-var currWork = 0;
-var currExcercise = 0;
+// var currLife = 0;
+// var currWork = 0;
+// var currExcercise = 0;
 
 $('#login').leanModal({
     top: 100,
