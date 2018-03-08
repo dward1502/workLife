@@ -1,6 +1,5 @@
-// let currLife = 0;
-// let currWork = 0;
-// let currExercise = 0;
+// var calcPoints = require('./controllers/worklife_controller.js');
+
 $(document).ready(function () {
     $("#loginModal").hide();
 });
@@ -183,7 +182,7 @@ var myChart = new Chart(ctx, {
         labels: ["Work", "Exercise", "Life"],
         datasets: [{
             label: '# of Votes',
-            data: [currWork, currExercise, currLife,],
+            data: [calcPoints.calcWork, calcPoints.calcEx, calcPoints.calcLife,],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
