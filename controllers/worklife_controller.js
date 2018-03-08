@@ -55,6 +55,8 @@ router.get('/survey', function(req, res){
 //Route to the results. TO BE DONE: get the data for the specific user,
 //calculate their values per category, then send it back to the client.
 //Will also need to get data from the suggestions database.
+
+
 router.get('/reports/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
@@ -62,21 +64,21 @@ router.get('/reports/:authToken', function(req, res){
             auth: req.params.authToken
         }
     }).then(function (dbUser) {
-        res.render("reports", dbUser);
+        var hbsObject = {
+            user: dbUser
+        }
+        res.render("reports", hbsObject);
     });
 });
+
+
 
 //Route to the input. TO BE DONE: get the data for the specific user.
 router.get('/input/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
         where: {
-            username: {
-                [Op.like]: req.body.username
-            },
-            password: {
-                [Op.like]: req.body.password
-            }
+            auth: req.params.authToken
         }
     }).then(function (dbUser) {
 
@@ -149,12 +151,39 @@ router.put('/api/users', function(req, res){
     });
 });
 
+
+function calcPoint(survey){
+
+    var currExercise = parseInt(survey.currExercise);
+    var currWork = parseInt(survey.currWork);
+    var currLife = parseInt(survey.currLife);
+    var counter = 0
+    for(question in survey){
+        if(survey[question] === "yes"){
+           if(counter < 9){
+            //do something
+            currExercise += 1;
+           } else if (counter >= 9 && counter < 19){
+            currWork += 1;
+           } else if(counter >= 19){
+            currLife += 1;
+           }
+        }
+        counter++;
+    }
+
+    return current = {currExercise: currExercise, currWork: currWork, currLife: currLife};
+}
+
 router.put('/api/users/:authToken', function(req, res){
     console.log(req.body);
+
+    var weekPoints = calcPoint(req.body);
+
     db.User.update({
-        work_points: req.body.currWork + 1,
-        life_points: req.body.currLife + 1,
-        exercise_points: req.body.currExercise + 1,
+        work_points: weekPoints.currWork,
+        life_points: weekPoints.currLife,
+        exercise_points: weekPoints.currExercise,
         previous_exercise: req.body.currExercise,
         previous_work: req.body.currWork,
         previous_life: req.body.currLife
@@ -206,4 +235,6 @@ router.post('/login', function(req, res){
 });
 
 // Export routes for server.js to use.
-module.exports = router;
+module.exports = {
+    router: router
+};
