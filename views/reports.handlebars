@@ -9,7 +9,13 @@
         <canvas id="myChart" style="position: relative; height:40vh; width:40vw"></canvas>
     </div>
     <h1 class="suggestTitle">Suggestions</h1>
-    <div class="suggestDiv">Insert suggestions from get request on the server.</div>
+    <div class="suggestDiv">
+        {{#each suggestions}}
+        <li>
+            {{text}}
+        </li>
+        {{/each}}
+    </div>
 
 </div>
   
