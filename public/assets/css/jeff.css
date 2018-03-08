@@ -54,13 +54,13 @@ img {
 .log {
     margin: auto;
     grid-column: 2/3;
-    grid-row: 3/4;
+    grid-row: 4/5;
 }
 
 .reg {
     margin: auto;
     grid-column: 3/4;
-    grid-row: 3/4;
+    grid-row: 4/5;
 }
 
 /*------------------------------------------------------------------
@@ -340,7 +340,7 @@ input {
     grid-row: 1/1;
     margin: auto;
     margin-top: 20px;
-    margin-left: 80px;
+    margin-left: 20px;
 }
 
 .usernameDisplay {
@@ -348,7 +348,7 @@ input {
     grid-column: 7/9;
     grid-row: 1/1;
     margin: auto;
-    margin-right: 100px;
+    margin-right: 40px;
     color: white;
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -575,17 +575,13 @@ button:hover {
     background: #555555;
     border-radius: 5vh;
 }
-.suggestInfo {
-    margin-left: 50px;
-    margin-top: 40px;
-}
 /*----------------------------------
 [Green sock ]*/
 
 #logo {
     position: absolute;
-    right: 37%;
-    top: 20%;
+    left: 37%;
+    top: 15%;
     transform: translate(-50%, -50%);
     font-size: 40px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
