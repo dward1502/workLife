@@ -1,14 +1,16 @@
 
 <div class="container" id="container"></div>
 <div class="grid-cont-input">
-    <a class="login100-form-btn back" id="back" href="./home/{{user.auth}}">Back</a>
+    <a class="login100-form-btn back" id="back" href="./home/{{user.auth}}">Back to Home</a>
     <h2 class="usernameDisplay">{{user.username}}</h2>
     <h1 class="reportsTitle">Reports</h1>
     <div class="chartDiv">
         <canvas id="myChart" style="position: relative; height:40vh; width:40vw"></canvas>
     </div>
     <h1 class="suggestTitle">Suggestions</h1>
-    <div class="suggestDiv">Insert suggestions from get request on the server.</div>
+    <div class="suggestDiv">
+        <div class="suggestInfo">Insert suggestions from get request on the server.</div>
+    </div>
 
 </div>
   
