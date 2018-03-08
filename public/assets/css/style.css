@@ -22,16 +22,16 @@ body {
     grid-auto-rows: minmax(100px, auto);
     grid-template-areas: ". . . ."". triangle triangle ." " . . . ." ". butt butt .";
 }
+img {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    margin: auto;
+}
 
 .triangle {
     grid-column: 2/4;
     grid-row: 2/3;
     margin: auto;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 200px 200px 200px;
-    border-color: transparent transparent #0073e5 transparent;
     z-index: 1;
     grid-area: triangle;
 }
