@@ -20,7 +20,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
-    grid-template-areas: ". . . ."". triangle triangle ." " . . . ." ". butt butt .";
+    grid-template-areas: ". . . logout"". triangle triangle ." " . . . ." ". butt butt .";
 }
 img {
     grid-column: 2/4;
@@ -327,7 +327,7 @@ input {
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 5px;
     grid-auto-rows: minmax(25px, auto);
-    grid-template-areas: "butt . . . . . . user"". . . pageTitle pageTitle . . ." " . . . . . . . ." "..";
+    grid-template-areas: "butt . . . . . . logout"". . . pageTitle pageTitle . . ." " . . . . . . . ." "..";
 }
 
 .back {
@@ -339,8 +339,8 @@ input {
     margin-left: 20px;
 }
 
-.usernameDisplay {
-    grid-area: user;
+.logout {
+    grid-area: logout;
     grid-column: 7/9;
     grid-row: 1/1;
     margin: auto;
