@@ -104,7 +104,7 @@ $("#submit").on("click", function (event) {
         data: newRegUser
     }).then((res) =>{
         
-        localStorage.clear();
+        // localStorage.clear();
         localStorage.setItem("currAuth", res.auth);
         localStorage.setItem("currWork", res.work_points);
         localStorage.setItem("currExercise", res.exercise_points);
