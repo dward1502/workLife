@@ -377,7 +377,7 @@ input {
     grid-row: 1/1;
     margin: auto;
     margin-right: 100px;
-    color:greenyellow; 
+    color: rgba(174, 218, 175, 0.3);
     font-size:2em;
     
     /*color: white;
@@ -610,11 +610,14 @@ button:hover {
     grid-column: 5/8;
     background-color: rgba(174, 218, 175, 0.733);
     border-radius: 5vh;
+    font-size: 42px;
 }
 
 .suggestInfo {
     margin-left: 60px;
     margin-top: 120px;
+    font-size: 42px;
+  
 }
 
 /*----------------------------------
