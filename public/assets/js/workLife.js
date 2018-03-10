@@ -125,7 +125,101 @@ $("#subInput").on("click", function (event) {
     localStorage.setItem('prevExercise', prevExercise);
     localStorage.setItem('prevLife', prevLife);
     localStorage.setItem('prevWork', prevWork);
-    
+
+    var ex = 0;
+    var life = 0;
+    var work = 0;
+    //calculate current points here and save to global variable to be used in mychart
+    if ($(".exer1:checked").val() === 'yes'){
+        ex += 1;
+    }
+    if ($(".exer2:checked").val() === 'yes'){
+        ex += 1;
+    }
+    if ($(".exer3:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer4:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer5:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer6:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer7:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer8:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer9:checked").val() === 'yes') {
+        ex += 1;
+    }
+    //work calcs
+    if ($(".work1:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work2:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work3:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work4:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work5:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work6:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work7:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work8:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work9:checked").val() === 'yes') {
+        work += 1;
+    }
+
+    //life calcs
+    if ($(".life1:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life2:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life3:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life4:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life5:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life6:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life7:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life8:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life9:checked").val() === 'yes') {
+        life += 1;
+    }
+
+    localStorage.setItem('currWork', work);
+    localStorage.setItem('currLife', life);
+    localStorage.setItem('currExercise', ex);
+
+
     var wkInput = {
         exQ1: $(".exer1:checked").val(), exQ2: $(".exer2:checked").val(), exQ3: $(".exer3:checked").val(), exQ4: $(".exer4:checked").val(),
         exQ5: $(".exer5:checked").val(), exQ6: $(".exer6:checked").val(), exQ7: $(".exer7:checked").val(), exQ8: $(".exer8:checked").val(),
@@ -136,103 +230,13 @@ $("#subInput").on("click", function (event) {
         lifQ1: $(".life1:checked").val(), lifQ2: $(".life2:checked").val(), lifQ3: $(".life3:checked").val(), lifQ4: $(".life4:checked").val(),
         lifQ5: $(".life5:checked").val(), lifQ6: $(".life6:checked").val(), lifQ7: $(".life7:checked").val(), lifQ8: $(".life8:checked").val(),
         lifQ9: $(".life9:checked").val(),
+        currExercise: localStorage.getItem("currExercise"),
+        currLife: localStorage.getItem("currLife"),
+        currWork: localStorage.getItem("currWork"),
         prevExercise: localStorage.getItem("prevExercise"),
         prevLife: localStorage.getItem("prevLife"),
         prevWork: localStorage.getItem("prevWork")
     }
-
-    var ex = 0;
-    var life = 0;
-    var work = 0;
-    //calculate current points here and save to global variable to be used in mychart
-    if (wkInput.exQ1 === 'yes'){
-        ex += 1;
-    }
-    if (wkInput.exQ2 === 'yes'){
-        ex += 1;
-    }
-    if (wkInput.exQ3 === 'yes') {
-        ex += 1;
-    }
-    if (wkInput.exQ4 === 'yes') {
-        ex += 1;
-    }
-    if (wkInput.exQ5 === 'yes') {
-        ex += 1;
-    }
-    if (wkInput.exQ6 === 'yes') {
-        ex += 1;
-    }
-    if (wkInput.exQ7 === 'yes') {
-        ex += 1;
-    }
-    if (wkInput.exQ8 === 'yes') {
-        ex += 1;
-    }
-    if (wkInput.exQ9 === 'yes') {
-        ex += 1;
-    }
-    //work calcs
-    if (wkInput.wrkQ1 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ2 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ3 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ4 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ5 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ6 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ7 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ8 === 'yes') {
-        work += 1;
-    }
-    if (wkInput.wrkQ9 === 'yes') {
-        work += 1;
-    }
-
-    //life calcs
-    if (wkInput.lifQ1 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ2 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ3 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ4 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ5 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ6 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ7 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ8 === 'yes') {
-        life += 1;
-    }
-    if (wkInput.lifQ9 === 'yes') {
-        life += 1;
-    }
-
-    localStorage.setItem('currWork', work);
-    localStorage.setItem('currLife', life);
-    localStorage.setItem('currExercise', ex);
 
     //CREATE PUT METHOD TO UPDATE USER'S POINTS AT THIS URL 
     console.log("Here's the week input:" + wkInput);
@@ -241,10 +245,10 @@ $("#subInput").on("click", function (event) {
     $.ajax("/api/users/" + currAuth, {
         type: "PUT",
         data: wkInput
-    }).then((res) => {
+    }).then(res => {
         console.log("weekly input sent to server");
 
-        console.log(res);
+        console.log("Response: " + res);
 
         window.location = '/reports/' + currAuth;
     })
