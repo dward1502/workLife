@@ -2,19 +2,22 @@
 <div class="container" id="container"></div>
 <div class="grid-cont-input">
     <a class="login100-form-btn back" id="back" href="/home/{{user.auth}}">Back</a>
-    <a class="logout" id="logoutBtn" href="#">Logout</a>
-    <h2 class="usernameDisplay">{{user.username}}</h2>
-    <h1 class="reportsTitle">Reports</h1>
+     <h2 class="logout" id="logoutBtn">Sign Out <i class="fas fa-sign-out-alt"></i> </h2>
+   
+    {{!-- <h2 class="usernameDisplay">{{user.username}}</h2> --}}
+    <h1 class="reportsTitle"> {{user.username}} Reports</h1>
     <div class="chartDiv">
         <canvas id="myChart" style="position: relative; height:40vh; width:40vw"></canvas>
     </div>
     <h1 class="suggestTitle">Suggestions</h1>
     <div class="suggestDiv">
-        {{#each suggestions}}
-        <li>
-            {{text}}
-        </li>
-        {{/each}}
+        <div class="suggestInfo">
+            {{#each suggestions}}
+                <li>
+                    {{text}}
+                </li>
+            {{/each}}
+        </div>
     </div>
 
 </div>
