@@ -20,7 +20,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
-    grid-template-areas: ". . . logout"". triangle triangle ." " . user user ." ". butt butt .";
+    grid-template-areas: ". . . ."". triangle triangle ." " . user user ." ". butt butt .";
 }
 
 .user {
