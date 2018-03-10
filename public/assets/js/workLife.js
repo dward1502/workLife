@@ -1,24 +1,15 @@
-// var calcPoints = require('./controllers/worklife_controller.js');
-
-// var requirejs = require('requirejs');
-
-// requirejs.config({
-//     //Pass the top-level main.js/index.js require
-//     //function to requirejs so that node modules
-//     //are loaded relative to the top-level JS file.
-//     nodeRequire: require
-// });
-
-// requirejs([]);
-
 
 $(document).ready(function () {
     $("#loginModal").hide();
 });
 
-// var currLife = 0;
-// var currWork = 0;
-// var currExcercise = 0;
+
+var prevLife = 0;
+var prevWork = 0;
+var prevExercise = 0;
+var currLife = 0;
+var currWork = 0;
+var currExcercise = 0;
 
 $('#login').leanModal({
     top: 100,
@@ -130,34 +121,134 @@ $("#submit").on("click", function (event) {
  */
 $("#subInput").on("click", function (event) {
     event.preventDefault();
-    
+
+    localStorage.setItem('prevExercise', prevExercise);
+    localStorage.setItem('prevLife', prevLife);
+    localStorage.setItem('prevWork', prevWork);
+
+    var ex = 0;
+    var life = 0;
+    var work = 0;
+    //calculate current points here and save to global variable to be used in mychart
+    if ($(".exer1:checked").val() === 'yes'){
+        ex += 1;
+    }
+    if ($(".exer2:checked").val() === 'yes'){
+        ex += 1;
+    }
+    if ($(".exer3:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer4:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer5:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer6:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer7:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer8:checked").val() === 'yes') {
+        ex += 1;
+    }
+    if ($(".exer9:checked").val() === 'yes') {
+        ex += 1;
+    }
+    //work calcs
+    if ($(".work1:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work2:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work3:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work4:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work5:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work6:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work7:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work8:checked").val() === 'yes') {
+        work += 1;
+    }
+    if ($(".work9:checked").val() === 'yes') {
+        work += 1;
+    }
+
+    //life calcs
+    if ($(".life1:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life2:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life3:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life4:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life5:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life6:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life7:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life8:checked").val() === 'yes') {
+        life += 1;
+    }
+    if ($(".life9:checked").val() === 'yes') {
+        life += 1;
+    }
+
+    localStorage.setItem('currWork', work);
+    localStorage.setItem('currLife', life);
+    localStorage.setItem('currExercise', ex);
+
+
     var wkInput = {
-        exQ1: $(".work1:checked").val(), exQ1: $(".work2:checked").val(), exQ3: $(".work3:checked").val(), exQ4: $(".work4:checked").val(),
-        exQ5: $(".work5:checked").val(), exQ6: $(".work6:checked").val(), exQ7: $(".work7:checked").val(), exQ8: $(".work8:checked").val(),
-        exQ9: $(".work9:checked").val(),
+        exQ1: $(".exer1:checked").val(), exQ2: $(".exer2:checked").val(), exQ3: $(".exer3:checked").val(), exQ4: $(".exer4:checked").val(),
+        exQ5: $(".exer5:checked").val(), exQ6: $(".exer6:checked").val(), exQ7: $(".exer7:checked").val(), exQ8: $(".exer8:checked").val(),
+        exQ9: $(".exer9:checked").val(),
         wrkQ1: $(".work1:checked").val(), wrkQ2: $(".work2:checked").val(), wrkQ3: $(".work3:checked").val(), wrkQ4: $(".work4:checked").val(),
         wrkQ5: $(".work5:checked").val(), wrkQ6: $(".work6:checked").val(), wrkQ7: $(".work7:checked").val(), wrkQ8: $(".work8:checked").val(),
         wrkQ9: $(".work9:checked").val(),
-        lifQ1: $(".work1:checked").val(), lifQ2: $(".work2:checked").val(), lifQ3: $(".work3:checked").val(), lifQ4: $(".work4:checked").val(),
-        lifQ5: $(".work5:checked").val(), lifQ6: $(".work6:checked").val(), lifQ7: $(".work7:checked").val(), lifQ8: $(".work8:checked").val(),
-        lifQ9: $(".work9:checked").val(),
+        lifQ1: $(".life1:checked").val(), lifQ2: $(".life2:checked").val(), lifQ3: $(".life3:checked").val(), lifQ4: $(".life4:checked").val(),
+        lifQ5: $(".life5:checked").val(), lifQ6: $(".life6:checked").val(), lifQ7: $(".life7:checked").val(), lifQ8: $(".life8:checked").val(),
+        lifQ9: $(".life9:checked").val(),
         currExercise: localStorage.getItem("currExercise"),
         currLife: localStorage.getItem("currLife"),
-        currWork: localStorage.getItem("currWork")
+        currWork: localStorage.getItem("currWork"),
+        prevExercise: localStorage.getItem("prevExercise"),
+        prevLife: localStorage.getItem("prevLife"),
+        prevWork: localStorage.getItem("prevWork")
     }
 
-    
     //CREATE PUT METHOD TO UPDATE USER'S POINTS AT THIS URL 
-    console.log(wkInput);
+    console.log("Here's the week input:" + wkInput);
     console.log('currUser is: ', localStorage.getItem("currAuth"));
     var currAuth = localStorage.getItem("currAuth")
     $.ajax("/api/users/" + currAuth, {
         type: "PUT",
         data: wkInput
-    }).then((res) => {
+    }).then(res => {
         console.log("weekly input sent to server");
 
-        console.log(res);
+        console.log("Response: " + res);
 
         window.location = '/reports/' + currAuth;
     })
@@ -207,7 +298,7 @@ var myChart = new Chart(ctx, {
         labels: ["Work", "Exercise", "Life"],
         datasets: [{
             label: '# of Votes',
-            data: [calcPoints.calcWork, calcPoints.calcEx, calcPoints.calcLife,],
+            data: [localStorage.getItem('currWork'), localStorage.getItem('currExercise'), localStorage.getItem('currLife')],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
