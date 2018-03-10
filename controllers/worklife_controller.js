@@ -8,6 +8,10 @@ var Op = sequelize.Op;
 // Import the sequelize model
 var db = require('../models');
 
+/**
+ * Function to turn an array into a string separated by commas.
+ * @param {*} arr an array strings
+ */
 function createString(arr){
     newString = '';
     arr.forEach(element => {
@@ -17,18 +21,46 @@ function createString(arr){
 
     return newString;
 }
-//Route to index
+
+/**
+ * Function that calculates the points accrued for the week.
+ * @param {*} survey A JSON object that contains the input answers
+ */
+function calcPoint(survey) {
+
+    var currExercise = parseInt(survey.currExercise);
+    var currWork = parseInt(survey.currWork);
+    var currLife = parseInt(survey.currLife);
+    var counter = 0
+    for (question in survey) {
+        if (survey[question] === "yes") {
+            if (counter < 9) {
+                //do something
+                currExercise += 1;
+            } else if (counter >= 9 && counter < 19) {
+                currWork += 1;
+            } else if (counter >= 19) {
+                currLife += 1;
+            }
+        }
+        counter++;
+    }
+
+    return current = { currExercise: currExercise, currWork: currWork, currLife: currLife };
+}
+
+//Route to index.
 router.get('/', function (req, res) {
     res.render("index");
 });
 
-//Route to registration
+//Route to registration.
 router.get('/register', function(req, res){
     res.render("register");
 });
 
-//Route to homepage. TO BE DONE: get the data for the specific user
-//and then pass back user info to the page.
+//Route to homepage. Sends user json object back to
+//client.
 router.get('/home/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
@@ -52,28 +84,51 @@ router.get('/survey', function(req, res){
     res.render("survey");
 });
 
-//Route to the results. TO BE DONE: get the data for the specific user,
-//calculate their values per category, then send it back to the client.
-//Will also need to get data from the suggestions database.
-
-
+//Route to the results. Determines the suggestions
+//to display based on the lowest points total the
+//user has.
 router.get('/reports/:authToken', function(req, res){
-    //NOT DONE
+
     db.User.findOne({
         where: {
             auth: req.params.authToken
         }
     }).then(function (dbUser) {
-        var hbsObject = {
-            user: dbUser
+
+        var workPoints = dbUser.work_points;
+        var exercisePoints = dbUser.exercise_points;
+        var lifePoints = dbUser.life_points;
+        var suggestType = "";
+
+        if (workPoints <= exercisePoints && workPoints <= lifePoints) {
+            suggestType = "work";
         }
-        res.render("reports", hbsObject);
+        else if (exercisePoints <= workPoints && exercisePoints <= lifePoints) {
+            suggestType = "exercise";
+        }
+        else if (lifePoints <= workPoints && lifePoints <= exercisePoints) {
+            suggestType = "life";
+        }
+
+        db.Suggestions.findAll({
+            where: {
+                type: suggestType
+            }
+        }).then(function (dbSuggestions) {
+            var hbsObject = {
+                user: dbUser,
+                suggestions: dbSuggestions
+            }
+            res.render("reports", hbsObject);
+        }).catch(function (err) {
+            res.json(err);
+        });
     });
 });
 
 
 
-//Route to the input. TO BE DONE: get the data for the specific user.
+//Route to the input.
 router.get('/input/:authToken', function(req, res){
     //NOT DONE
     db.User.findOne({
@@ -92,23 +147,21 @@ router.get('/input/:authToken', function(req, res){
 });
 
 
-//Route to post the user data on registration. TO BE DONE:
-//Determine whether we can just pass back the JSON or 
-//whether we need to render the home page. Ensure
-//the names for each field from the client corresponds to the names
-//used in this file. Survey has knowledge of user.
+//Route to post the user data on registration.
+//Creates User object and survey object and
+//adds them to the database.
 router.post('/api/users', function (req, res) {
 
     authToken = cryptoRandomString(10);
-    //MIGHT NEED TO ADJUST DEPENDING ON HOW DATA IS PASSED IN.
+
     db.User.create({
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
         auth: authToken,
-        work_points: 0,//req.body.workPoints,
-        life_points: 0,//req.body.lifePoints,
-        exercise_points: 0,//req.body.exercisePoints,
+        work_points: 0,
+        life_points: 0,
+        exercise_points: 0,
     }).then(function (dbUser) {   
         db.Survey.create({
             age: req.body.age,
@@ -132,10 +185,8 @@ router.post('/api/users', function (req, res) {
     });
 });
 
-//Route to update the user's info. TO BE DONE: Create
-//the update function using sequelize.
+//Route to update the user's info. 
 router.put('/api/users', function(req, res){
-    //Need to figure out what data is being sent on the update request.
     db.User.update({
         email: req.body.email,
         password: req.body.password,
@@ -151,33 +202,8 @@ router.put('/api/users', function(req, res){
     });
 });
 
-
-function calcPoint(survey){
-
-    var currExercise = parseInt(survey.currExercise);
-    var currWork = parseInt(survey.currWork);
-    var currLife = parseInt(survey.currLife);
-    var counter = 0
-    for(question in survey){
-        if(survey[question] === "yes"){
-           if(counter < 9){
-            //do something
-            currExercise += 1;
-           } else if (counter >= 9 && counter < 19){
-            currWork += 1;
-           } else if(counter >= 19){
-            currLife += 1;
-           }
-        }
-        counter++;
-    }
-
-    return current = {currExercise: currExercise, currWork: currWork, currLife: currLife};
-}
-
+//Route to update the user based on their weekly input.
 router.put('/api/users/:authToken', function(req, res){
-    console.log(req.body);
-
     var weekPoints = calcPoint(req.body);
 
     db.User.update({
@@ -234,12 +260,11 @@ router.post('/login', function(req, res){
 
 });
 
+//Route to logout.
 router.post('/logout', function(req, res){
     res.json({});
 })
 
 // Export routes for server.js to use.
-module.exports = {
-    router: router,
-    calcPoint: calcPoint
-};
+module.exports = router;
+
