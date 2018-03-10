@@ -1,7 +1,11 @@
 {
   "development": {
     "username": "root",
+<<<<<<< HEAD
     "password": "Pointers619",
+=======
+    "password": "X1ky147z",
+>>>>>>> 49f1993e82e687c7d90b00b78da654263cba4647
     "database": "worklife_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
