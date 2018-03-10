@@ -625,7 +625,7 @@ button:hover {
 
 #logo {
     position: absolute;
-    left: 37%;
+    right: 37%;
     top: 15%;
     transform: translate(-50%, -50%);
     font-size: 40px;
